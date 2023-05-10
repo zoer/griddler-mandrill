@@ -12,7 +12,7 @@ module Griddler
 
       def normalize_params
         events.select do |event|
-          event[:spf].present? && (event[:spf][:result] == 'pass' || event[:spf][:result] == 'neutral')
+          event[:spf].present? && ['pass', 'neutral', nil].include?(event[:spf][:result])
         end.map do |event|
           {
             to: recipients(:to, event),
